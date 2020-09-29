@@ -105,3 +105,4 @@ dist
 
 server/build/
 client/build/
+state/
