@@ -231,6 +231,7 @@ export class MetadataStorage {
         if (!this._typeMetadatas.has(metadata.target)) {
             this._typeMetadatas.set(metadata.target, new Map<string, TypeMetadata>());
         }
+        // eslint-disable-next-line
         const temp = this._typeMetadatas.get(metadata.target)!.set(metadata.propertyName, metadata);
     }
 
@@ -604,6 +605,7 @@ export class TransformOperationExecutor {
                         if (metadata.options && metadata.options.discriminator && metadata.options.discriminator.property && metadata.options.discriminator.subTypes) {
                             if (!(value[valueKey] instanceof Array)) {
                                 if (this.transformationType === TransformationType.PLAIN_TO_CLASS) {
+                                    // eslint-disable-next-line
                                     type = metadata.options.discriminator.subTypes.find((subType) => {
                                         if (subValue && metadata.options.discriminator!.property in subValue) {
                                             return subType.name === subValue[metadata.options.discriminator!.property]
@@ -872,11 +874,7 @@ function instantiateArrayType(arrayType: Function): Array<any> | Set<any> {
 }
 
 export function testForBuffer(): boolean {
-    try {
-        Buffer
-        return true;
-    } catch { }
-    return false;
+    return typeof Buffer !== 'undefined';
 }
 
 export type ClassType<T> = {

@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { Type, deserializeArray } from './plain_to_class';
+import { Type, deserializeArray } from './shared/plain_to_class';
 
 class LogMessage {
     @Type(() => Date)
@@ -12,16 +12,16 @@ const logDirPath: string = '../log/';
 const logFilename: string = 'shlock_server.log';
 const logPath: string = logDirPath + logFilename;
 
-export const getLogMessages =  ()  => {
+export const getLogMessages = () => {
     return logMessages;
 }
 
 export const log = (str: string) => {
+    console.log(str);
     let msg: LogMessage = new LogMessage();
     msg.m = str;
     logMessages.push(msg);
     fs.promises.appendFile(logPath, JSON.stringify(msg) + ",");
-    console.log(str);
 }
 
 export const initLogs = () => {

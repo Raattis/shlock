@@ -1,7 +1,7 @@
 import fs from 'fs'
 import { ChatState } from './state'
 import { log } from './log'
-import { deserialize } from './plain_to_class'
+import { deserialize } from './shared/plain_to_class'
 
 const stateDirPath: string = "../state/";
 const stateFilename: string = "chat_state.json";
@@ -12,7 +12,7 @@ const fsExists = async (path: string) => {
 }
 
 let _savingQueued = false;
-const writeChatState = async (state : ChatState) => {
+const writeChatState = async (state: ChatState) => {
     const dirExists: Boolean = await fsExists(stateDirPath);
     if (!dirExists) {
         log("mkdir " + stateDirPath);
@@ -28,7 +28,7 @@ const writeChatState = async (state : ChatState) => {
     _savingQueued = false;
 }
 
-export const queueSaving = (state : ChatState) => {
+export const queueSaving = (state: ChatState) => {
     if (_savingQueued)
         return;
 
