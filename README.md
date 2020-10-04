@@ -1,2 +1,2 @@
 # shlock
-Overly simplified slack clone for practice
+Overly simplified slack clone
